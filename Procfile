@@ -1,1 +1,1 @@
-web: gunicorn vcconnect-flask:app --log-file -
+web: gunicorn manage:app --log-file -
