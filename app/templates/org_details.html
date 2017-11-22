@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Org Details{% endblock %}
+
+{% block page_content %}
+<h1>{{ org_details['Organisation'] }}</h1>
+<p>{{ org_details['ServicesProvided'] }}</p>
+<p>{{ org_details['MainPurpose'] }}</p>
+
+<address>
+  <span class="glyphicon glyphicon-map-marker"></span> {{ org_details['address1'] }}<br>
+  {{ org_details['Town'] }}<br>
+  {{ org_details['Postcode'] }}<br>
+
+  <span class="glyphicon glyphicon-time"></span> {{ org_details['OpeningHours'] }}<br>
+  <span class="glyphicon glyphicon-phone"></span> {{ org_details['Phone'] }}<br>
+  <span class="glyphicon glyphicon-envelope"></span> <a href="mailto:{{ org_details['EmailAddress'] }}">{{ org_details['EmailAddress'] }}</a><br>
+  <span class="glyphicon glyphicon-home"></span> <a href="{{ org_details['WebSiteAddress'] }}">{{ org_details['WebSiteAddress'] }}</a><br>
+</address>
+{% endblock %}

@@ -21,3 +21,10 @@ def get_orgs_by_main_area(main_area_id):
     org_list = r.json()
 
     return org_list
+
+
+def get_org_details(org_id):
+    r = requests.post('https://www.vcconnectsystem.org.uk/api/GetOrganisationDetails', json={"apiKey": api_key, "OrgID": org_id})
+    org_details = r.json()
+
+    return org_details

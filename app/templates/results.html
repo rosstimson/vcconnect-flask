@@ -5,9 +5,9 @@
 {% block page_content %}
 <ul>
   {% for result in results %}
-    {% if result['InformationMadePublic'] == True %}
-    <li>{{ result['Organisation'] }}</li>
-    {% endif %}
+  {% if result['InformationMadePublic'] == True %}
+  <li><a href="{{ url_for('.org', id=result['AddressID']) }}">{{ result['Organisation'] }}</a></li>
+  {% endif %}
   {% endfor %}
 </ul>
 {% endblock %}
