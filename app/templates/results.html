@@ -5,7 +5,7 @@
 {% block page_content %}
 <ul>
   {% for result in results %}
-  {% if result['InformationMadePublic'] == True %}
+  {% if result['InformationMadePublic'] == True and result['Expired'] == False %}
   <li><a href="{{ url_for('.org', id=result['AddressID']) }}">{{ result['Organisation'] }}</a></li>
   {% endif %}
   {% endfor %}
