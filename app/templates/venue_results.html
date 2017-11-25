@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Venue Search Results{% endblock %}
+
+{% block page_content %}
+<ul>
+  {% for result in results %}
+  {% if result['InformationMadePublic'] == True and result['Expired'] == False %}
+  <li>
+    <header>
+      <h1>{{ result['Organisation'] }}<span class="badge badge-secondary">{{ result['OrganisationType'] }}</span></h1>
+    </header>
+
+    <p>{{ result['MainPurpose'] }}</p>
+
+    <address>
+      <span class="glyphicon glyphicon-map-marker"></span> {{ result['Building'] }}<br>
+      {{ result['HouseNo'] + ' ' + result['Street'] }}<br>
+      {{ result['Town'] }}<br>
+      {{ result['County'] }}<br>
+      {{ result['Postcode'] }}<br>
+
+      <span class="glyphicon glyphicon-phone"></span> {{ result['Phone'] }}<br>
+      <span class="glyphicon glyphicon-envelope"></span> <a href="mailto:{{ result['EmailAddress'] }}">{{ result['EmailAddress'] }}</a><br>
+    </address>
+  </li>
+  {% endif %}
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -16,6 +16,13 @@ def get_main_area_dropdown():
     return main_area_dropdown_items
 
 
+def get_venues_by_main_area(main_area_id):
+    r = requests.post('https://www.vcconnectsystem.org.uk/api/GetVenueList', json={"apiKey": api_key, "MainAreaID": main_area_id})
+    venue_list = r.json()
+
+    return venue_list
+
+
 def get_orgs_by_main_area(main_area_id):
     r = requests.post('https://www.vcconnectsystem.org.uk/api/GetOrganisationList', json={"apiKey": api_key, "MainAreaID": main_area_id})
     org_list = r.json()
