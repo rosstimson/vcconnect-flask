@@ -9,4 +9,4 @@ RUN pipenv install
 
 EXPOSE 8000
 
-CMD [ "pipenv", "run", "gunicorn", "--bind", "0.0.0.0:8000", "--log-file", "-", "vcconnect-flask:app"]
+CMD [ "pipenv", "run", "gunicorn", "--bind", "0.0.0.0:8000", "--log-file", "-", "manage:app"]
