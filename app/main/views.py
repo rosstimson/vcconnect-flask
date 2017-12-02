@@ -1,12 +1,13 @@
 from flask import render_template, session, redirect, url_for, request, session
 from . import main
-from .forms import MainAreaForm
-from .vcconnect import get_orgs_by_main_area, get_venues_by_main_area, get_org_details
+from .forms import MainAreaForm, VenueSearchForm
+from .vcconnect import get_orgs_by_main_area, get_venues, get_org_details
 
 
 @main.route('/')
 def index():
     return render_template('index.html')
+
 
 @main.route('/orgs', methods=['GET', 'POST'])
 def orgs():
@@ -15,15 +16,6 @@ def orgs():
         session['main_area'] = form.main_area.data
         return redirect(url_for('.org_results'))
     return render_template('org_search.html', form=form, main_area=session.get('main_area'))
-
-
-@main.route('/venues', methods=['GET', 'POST'])
-def venues():
-    form = MainAreaForm()
-    if form.validate_on_submit():
-        session['main_area'] = form.main_area.data
-        return redirect(url_for('.venue_results'))
-    return render_template('venue_search.html', form=form, main_area=session.get('main_area'))
 
 
 # TODO Repetition here with the results routes otherwise there would
@@ -35,14 +27,54 @@ def org_results():
     return render_template('org_results.html', results=results)
 
 
-@main.route('/venue_results')
-def venue_results():
-    results = get_venues_by_main_area(session.get('main_area'))
-    return render_template('venue_results.html', results=results)
-
-
 @main.route('/org')
 def org():
     org_id = request.args.get('id')
     org_details = get_org_details(org_id)
     return render_template('org_details.html', org_details=org_details)
+
+
+@main.route('/venues', methods=['GET', 'POST'])
+def venues():
+    form = VenueSearchForm()
+    if form.validate_on_submit():
+        session['area_id'] = form.area_id.data
+        session['venue_car_parking'] = form.venue_car_parking.data
+        session['disabled'] = form.disabled.data
+        session['catering'] = form.catering.data
+        session['event_management'] = form.event_management.data
+        session['hearing'] = form.hearing.data
+        session['photocopy'] = form.photocopy.data
+        session['refreshments'] = form.refreshments.data
+        session['wheelchair'] = form.wheelchair.data
+        session['max_capacity'] = form.max_capacity.data
+
+        return redirect(url_for('.venue_results'))
+    return render_template('venue_search.html',
+                           form=form)
+
+
+@main.route('/venue_results')
+def venue_results():
+    area_id = session.get('area_id')
+    venue_car_parking = session.get('venue_car_parking')
+    disabled = session.get('disabled')
+    catering = session.get('catering')
+    event_management = session.get('event_management')
+    hearing = session.get('hearing')
+    photocopy = session.get('photocopy')
+    refreshments = session.get('refreshments')
+    wheelchair = session.get('wheelchair')
+    max_capacity = session.get('max_capacity')
+
+    results = get_venues(area_id=area_id,
+                         venue_car_parking=venue_car_parking,
+                         disabled=disabled,
+                         catering=catering,
+                         event_management=event_management,
+                         hearing=hearing,
+                         photocopy=photocopy,
+                         refreshments=refreshments,
+                         wheelchair=wheelchair,
+                         max_capacity=max_capacity)
+    return render_template('venue_results.html', results=results)
