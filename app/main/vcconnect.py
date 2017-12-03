@@ -41,7 +41,6 @@ def get_main_area_dropdown():
 
     for i in main_area_list:
         main_area_dropdown_items.append((i['MainAreaID'], i['MainArea']))
-    print(main_area_dropdown_items)
     return main_area_dropdown_items
 
 
