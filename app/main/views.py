@@ -1,7 +1,7 @@
 from flask import render_template, session, redirect, url_for, request, session
 from . import main
-from .forms import MainAreaForm, VenueSearchForm
-from .vcconnect import get_orgs_by_main_area, get_venues, get_org_details
+from .forms import OrgSearchForm, VenueSearchForm
+from .vcconnect import get_orgs, get_venues, get_org_details, displayable
 
 
 @main.route('/')
@@ -11,11 +11,14 @@ def index():
 
 @main.route('/orgs', methods=['GET', 'POST'])
 def orgs():
-    form = MainAreaForm()
+    form = OrgSearchForm()
     if form.validate_on_submit():
-        session['main_area'] = form.main_area.data
+        session['main_area_id'] = form.main_area_id.data
+        session['service_id'] = form.service_id.data
+        session['client_group_id'] = form.client_group_id.data
+
         return redirect(url_for('.org_results'))
-    return render_template('org_search.html', form=form, main_area=session.get('main_area'))
+    return render_template('org_search.html', form=form)
 
 
 # TODO Repetition here with the results routes otherwise there would
@@ -23,15 +26,25 @@ def orgs():
 # unnecessary depending on the search being done.
 @main.route('/org_results')
 def org_results():
-    results = get_orgs_by_main_area(session.get('main_area'))
+    main_area_id = session.get('main_area_id')
+    service_id = session.get('service_id')
+    client_group_id = session.get('client_group_id')
+
+    results = get_orgs(main_area_id=main_area_id,
+                       service_id=service_id,
+                       client_group_id=client_group_id)
     return render_template('org_results.html', results=results)
 
 
 @main.route('/org')
 def org():
     org_id = request.args.get('id')
-    org_details = get_org_details(org_id)
-    return render_template('org_details.html', org_details=org_details)
+    all_orgs = get_orgs()
+    if displayable(all_orgs, org_id) == True:
+        org_details = get_org_details(org_id)
+        return render_template('org_details.html', org_details=org_details)
+    else:
+        return render_template('404.html'), 404
 
 
 @main.route('/venues', methods=['GET', 'POST'])
@@ -50,8 +63,7 @@ def venues():
         session['max_capacity'] = form.max_capacity.data
 
         return redirect(url_for('.venue_results'))
-    return render_template('venue_search.html',
-                           form=form)
+    return render_template('venue_search.html', form=form)
 
 
 @main.route('/venue_results')

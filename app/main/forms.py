@@ -1,15 +1,22 @@
 from flask_wtf import FlaskForm
 from wtforms import BooleanField, SelectField, SubmitField, IntegerField
 from wtforms.validators import Required, Optional
-from .vcconnect import get_main_area_dropdown
+from .vcconnect import get_main_area_dropdown, get_service_dropdown, get_client_group_dropdown
 
 
-class MainAreaForm(FlaskForm):
-    choices = get_main_area_dropdown()
-    main_area = SelectField('Main Area',
-                            coerce=int,
-                            choices=get_main_area_dropdown(),
-                            validators=[Required()])
+class OrgSearchForm(FlaskForm):
+    main_area_id = SelectField('Area',
+                               coerce=int,
+                               choices=get_main_area_dropdown(),
+                               validators=[Optional()])
+    service_id = SelectField('Service',
+                               coerce=int,
+                               choices=get_service_dropdown(),
+                               validators=[Optional()])
+    client_group_id = SelectField('Client Group',
+                               coerce=int,
+                               choices=get_client_group_dropdown(),
+                               validators=[Optional()])
     submit = SubmitField('Submit')
 
 
@@ -17,7 +24,7 @@ class VenueSearchForm(FlaskForm):
     area_id = SelectField('Area',
                           coerce=int,
                           choices=get_main_area_dropdown(),
-                          validators=[Required()])
+                          validators=[Optional()])
     venue_car_parking = BooleanField('Car Parking')
     disabled = BooleanField('Disabled Parking')
     catering = BooleanField('Catering')
