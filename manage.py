@@ -4,7 +4,7 @@ from app import create_app
 from flask_script import Manager, Shell
 
 
-app = create_app(os.environ.get('FLASK_CONFIG', 'default'))
+app = create_app(os.getenv('FLASK_CONFIG', 'default'))
 manager = Manager(app)
 
 

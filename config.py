@@ -6,6 +6,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config:
     SECRET_KEY = os.environb.get(b'SECRET_KEY')
     VCC_API_KEY = os.environ.get('VCC_API_KEY')
+    DEBUG = False
 
 
     @staticmethod
@@ -19,6 +20,7 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
+    WTF_CSRF_ENABLED = False
 
 
 # class ProductionConfig(Config):
