@@ -1,9 +1,23 @@
 {% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %}VC Connect{% endblock %}
+{% block title %}Venue Search{% endblock %}
 
 {% block page_content %}
 <h1>Venue Search</h1>
-{{ wtf.quick_form(form) }}
+
+<form action="" method="post">
+  {{ form.csrf_token }}
+  {{ form.area_id.label }} {{ form.area_id }}
+  {{ form.venue_car_parking.label }} {{ form.venue_car_parking }}
+  {{ form.disabled.label }} {{ form.disabled }}
+  {{ form.catering.label }} {{ form.catering }}
+  {{ form.event_management.label }} {{ form.event_management }}
+  {{ form.hearing.label }} {{ form.hearing }}
+  {{ form.photocopy.label }} {{ form.photocopy }}
+  {{ form.refreshments.label }} {{ form.refreshments }}
+  {{ form.wheelchair.label }} {{ form.wheelchair }}
+  {{ form.max_capacity.label }} {{ form.max_capacity }}
+  {{ form.submit }}
+</form>
+
 {% endblock %}

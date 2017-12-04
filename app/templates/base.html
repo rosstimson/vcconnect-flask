@@ -1,41 +1,42 @@
-{% extends "bootstrap/base.html" %}
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    {% block head %}
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}Community Directory{% endblock %}</title>
+    
 
-{% block title %}Community Directory{% endblock %}
 
-{% block head %}
-{{ super() }}
-<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-{% endblock %}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='semantic-ui/semantic.min.css') }}">
+    {% endblock %}
+  </head>
 
-{% block navbar %}
-<div class="navbar navbar-inverse" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Community Directory</a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-	      <li><a href="/orgs">Organisation Search</a></li>
-	      <li><a href="/venues">Venue Search</a></li>
-            </ul>
-        </div>
+  {% block navbar %}
+  <div class="ui fixed menu">
+    <div class="ui container">
+      <a href="{{ url_for('.index') }}" class="header item">
+        <img class="logo" src="{{ url_for('static', filename='logo.jpg') }}">
+        Community Directory
+      </a>
+      <a href="{{ url_for('.orgs') }}" class="item">Organisation Search</a>
+      <a href="{{ url_for('.venues') }}" class="item">Venue Search</a>
     </div>
-</div>
-{% endblock %}
+  </div>
+  {% endblock %}
 
-{% block content %}
-<div class="container">
-    {% block page_content %}{% endblock %}
-</div>
-{% endblock %}
+  {% block content %}
+  {% block page_content %}{% endblock %}
+  {% endblock %}
 
-{% block scripts %}
-{{ super() }}
-{% endblock %}
+  {% block scripts %}
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous">
+  </script>
+  <script src="{{ url_for('static', filename='semantic-ui/semantic.min.js') }}"></script>
+  {% endblock %}
+</html>

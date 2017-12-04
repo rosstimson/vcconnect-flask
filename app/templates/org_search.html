@@ -1,9 +1,74 @@
 {% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %}VC Connect{% endblock %}
+{% block head %}
+{{ super() }}
+<style type="text/css">
+ body {
+   background-color: #DADADA;
+ }
+ body > .grid {
+   height: 100%;
+ }
+ .column {
+   max-width: 450px;
+ }
+</style>
+{% endblock %}
+
+{% block title %}Organisation Search{% endblock %}
 
 {% block page_content %}
-<h1>Organisation Search</h1>
-{{ wtf.quick_form(form) }}
+
+<div class="ui middle aligned center aligned grid">
+  <div class="column">
+    <h1 class="ui blue header">
+      <i class="huge search icon"></i>
+      <div class="content">
+	Organisation Search
+      </div>
+    </h1>
+
+    <form action="" method="post" class="ui large form">
+      {{ form.csrf_token }}
+      <div class="ui stacked segment">
+	<div class="field">
+	  {{ form.main_area_id.label }}
+	  {{ form.main_area_id }}
+	</div>
+
+	<div class="ui accordion field">
+	  <div class="title active">
+	    <i class="icon dropdown"></i>
+	    Advanced search
+	  </div>
+	  <div class="content hidden">
+	    <div class="field">
+	      {{ form.service_id.label(class_="transition") }}
+	      {{ form.service_id(class_="transition") }}
+	    </div>
+	    <div class="field">
+	      {{ form.client_group_id.label(class_="transition") }}
+	      {{ form.client_group_id(class_="transition") }}
+	    </div>
+	  </div>
+	</div>
+	<button type="submit" name="submit" class="ui fluid large primary submit button">Search</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+ $('select')
+   .dropdown()
+ ;
+
+ $('.ui.accordion')
+   .accordion()
+ ;
+</script>
 {% endblock %}

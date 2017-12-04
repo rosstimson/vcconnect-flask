@@ -7,17 +7,16 @@ name = "pypi"
 
 [packages]
 
-flask = "*"
-flask-script = "*"
-flask-bootstrap = "*"
-flask-wtf = "*"
+Flask = "*"
+Flask-Script = "*"
+Flask-WTF = "*"
 requests = "*"
 gunicorn = "*"
 
 
 [dev-packages]
 
-flask-debugtoolbar = "*"
+Flask-DebugToolbar = "*"
 
 
 [requires]
