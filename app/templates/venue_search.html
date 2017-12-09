@@ -1,23 +1,129 @@
 {% extends "base.html" %}
 
+{% block head %}
+{{ super() }}
+<style type="text/css">
+ body {
+   background-color: #DADADA;
+ }
+ body > .grid {
+   height: 100%;
+ }
+ .column {
+   max-width: 450px;
+ }
+</style>
+{% endblock %}
+
 {% block title %}Venue Search{% endblock %}
 
 {% block page_content %}
-<h1>Venue Search</h1>
 
-<form action="" method="post">
-  {{ form.csrf_token }}
-  {{ form.area_id.label }} {{ form.area_id }}
-  {{ form.venue_car_parking.label }} {{ form.venue_car_parking }}
-  {{ form.disabled.label }} {{ form.disabled }}
-  {{ form.catering.label }} {{ form.catering }}
-  {{ form.event_management.label }} {{ form.event_management }}
-  {{ form.hearing.label }} {{ form.hearing }}
-  {{ form.photocopy.label }} {{ form.photocopy }}
-  {{ form.refreshments.label }} {{ form.refreshments }}
-  {{ form.wheelchair.label }} {{ form.wheelchair }}
-  {{ form.max_capacity.label }} {{ form.max_capacity }}
-  {{ form.submit }}
-</form>
+<div class="ui middle aligned center aligned grid">
+  <div class="column left aligned">
+    <h1 class="ui blue header">
+      <i class="huge search icon"></i>
+      <div class="content">
+	Venue Search
+      </div>
+    </h1>
 
+    <form action="" method="post" class="ui large form">
+      {{ form.csrf_token }}
+      <div class="ui stacked segment">
+	<div class="field">
+	  {{ form.area_id.label }}
+	  {{ form.area_id }}
+	</div>
+
+	<div class="ui accordion">
+	  <div class="title active">
+	    <i class="icon dropdown"></i>
+	    Advanced options
+	  </div>
+
+	  <div class="content hidden">
+	    <h4 class="ui dividing header">Parking</h4>
+	    <div class="field">
+	      <div class="ui toggle checkbox">
+		{{ form.venue_car_parking }}
+		{{ form.venue_car_parking.label }}
+	      </div>
+	    </div>
+	    <div class="field">
+	      <div class="ui toggle checkbox">
+		{{ form.disabled }}
+		{{ form.disabled.label }}
+	      </div>
+	    </div>
+
+	    <h4 class="ui dividing header">Universal Access</h4>
+	    <div class="field">
+	      <div class="ui toggle checkbox">
+		{{ form.wheelchair }}
+		{{ form.wheelchair.label }}
+	      </div>
+	    </div>
+	    <div class="field">
+	      <div class="ui toggle checkbox">
+		{{ form.hearing }}
+		{{ form.hearing.label }}
+	      </div>
+	    </div>
+
+	    <h4 class="ui dividing header">Facilities</h4>
+	    <div class="field">
+	      <div class="ui toggle checkbox">
+		{{ form.refreshments }}
+		{{ form.refreshments.label }}
+	      </div>
+	    </div>
+	    <div class="field">
+	      <div class="ui toggle checkbox">
+		{{ form.catering }}
+		{{ form.catering.label }}
+	      </div>
+	    </div>
+	    <div class="field">
+	      <div class="ui toggle checkbox">
+		{{ form.event_management }}
+		{{ form.event_management.label }}
+	      </div>
+	    </div>
+	    <div class="field">
+	      <div class="ui toggle checkbox">
+		{{ form.photocopy }}
+		{{ form.photocopy.label }}
+	      </div>
+	    </div>
+	    <div class="field">
+	      {{ form.max_capacity.label }}
+	      {{ form.max_capacity }}
+	    </div>
+	  </div>
+	</div>
+	<div class="ui divider">
+	</div>
+	<button type="submit" name="submit" class="ui fluid large primary submit button">Search</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+ $('select')
+   .dropdown()
+ ;
+
+ $('.ui.accordion')
+   .accordion()
+ ;
+ $('.ui.checkbox')
+   .checkbox()
+ ;
+</script>
 {% endblock %}

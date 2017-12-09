@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import BooleanField, SelectField, SubmitField, IntegerField
+from wtforms import BooleanField, SelectField, IntegerField
 from wtforms.validators import Required, Optional
 from .vcconnect import get_main_area_dropdown, get_service_dropdown, get_client_group_dropdown
 
@@ -17,7 +17,6 @@ class OrgSearchForm(FlaskForm):
                                coerce=int,
                                choices=get_client_group_dropdown(),
                                validators=[Optional()])
-    submit = SubmitField('Submit')
 
 
 class VenueSearchForm(FlaskForm):
@@ -34,4 +33,3 @@ class VenueSearchForm(FlaskForm):
     refreshments = BooleanField('Refreshments')
     wheelchair = BooleanField('Wheelchair Access')
     max_capacity = IntegerField('Room Capacity', validators=[Optional()])
-    submit = SubmitField('Submit')
