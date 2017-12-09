@@ -32,9 +32,10 @@
     <div class="ui relaxed divided list">
       {% for result in results %}
       <div class="item">
-	<i class="users middle aligned icon"></i>
 	<div class="content">
-	  <a class="header" href="{{ url_for('.org', id=result['AddressID']) }}">{{ result['Organisation'] }}</a>
+	  <h3 class="header">
+	    <a href="{{ url_for('.org', id=result['AddressID']) }}">{{ result['Organisation'] }}</a>
+	  </h3>
 	  <div class="description">{{ result['PrimaryService'] }}</div>
 	</div>
       </div>
