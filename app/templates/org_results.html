@@ -9,6 +9,9 @@
  body > .grid {
    height: 100%;
  }
+ main {
+   margin-top: 5% !important;
+ }
  .column {
    max-width: 860px;
    background-color: white;
@@ -20,7 +23,7 @@
 
 {% block page_content %}
 
-<div class="ui center aligned grid">
+<main class="ui center aligned grid">
   <div class="column left aligned">
     <h1 class="ui header">
       Organisation Search Results
@@ -38,7 +41,7 @@
       {% endfor %}
     </div>
   </div>
-</div>
+</main>
 
 {% endblock %}
 
