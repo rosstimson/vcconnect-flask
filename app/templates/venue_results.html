@@ -1,30 +1,70 @@
 {% extends "base.html" %}
 
+{% block head %}
+{{ super() }}
+<style type="text/css">
+ body {
+   background-color: #DADADA;
+ }
+ body > .grid {
+   height: 100%;
+ }
+ main {
+   margin-top: 5% !important;
+ }
+ .column {
+   max-width: 860px;
+   background-color: white;
+ }
+</style>
+{% endblock %}
+
 {% block title %}Venue Search Results{% endblock %}
 
 {% block page_content %}
-<ul>
-  {% for result in results %}
-  {% if result['InformationMadePublic'] == True and result['Expired'] == False %}
-  <li>
-    <header>
-      <h1>{{ result['Organisation'] }}<span class="badge badge-secondary">{{ result['OrganisationType'] }}</span></h1>
-    </header>
 
-    <p>{{ result['MainPurpose'] }}</p>
+<main class="ui center aligned grid">
+  <div class="column left aligned">
+    <h1 class="ui header">
+      Venue Search Results
+    </h1>
 
-    <address>
-      <span class="glyphicon glyphicon-map-marker"></span> {{ result['Building'] }}<br>
-      {{ result['HouseNo'] + ' ' + result['Street'] }}<br>
-      {{ result['Town'] }}<br>
-      {{ result['County'] }}<br>
-      {{ result['Postcode'] }}<br>
+    <div class="ui relaxed divided list">
+      {% for result in results %}
+      <div class="item">
+	<div class="content">
+	  <h3 class="header">{{ result['Organisation'] }}</h3>
+	  <div class="description">
+	    <div class="ui list">
+	      <div class="item">
+		<i class="marker icon"></i>
+		<div class="content">
+		  {{ result['Building'] }}, {{ result['HouseNo'] + ' ' + result['Street'] }}, {{ result['Town'] }}, {{ result['County'] }}, {{ result['Postcode'] }}
+		</div>
+	      </div>
+	      <div class="item">
+		<i class="phone icon"></i>
+		<div class="content">
+		  <a href="tel:{{ result['Phone'] }}">{{ result['Phone'] }}</a>
+		</div>
+	      </div>
+	      <div class="item">
+		<i class="mail icon"></i>
+		<div class="content">
+		  <a href="mailto:{{ result['EmailAddress'] }}">{{ result['EmailAddress'] }}</a>
+		</div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</main>
 
-      <span class="glyphicon glyphicon-phone"></span> {{ result['Phone'] }}<br>
-      <span class="glyphicon glyphicon-envelope"></span> <a href="mailto:{{ result['EmailAddress'] }}">{{ result['EmailAddress'] }}</a><br>
-    </address>
-  </li>
-  {% endif %}
-  {% endfor %}
-</ul>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
 {% endblock %}
