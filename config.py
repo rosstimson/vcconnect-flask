@@ -23,7 +23,8 @@ class TestingConfig(Config):
     WTF_CSRF_ENABLED = False
 
 
-# class ProductionConfig(Config):
+class ProductionConfig(Config):
+    DEBUG = False
 
 
 config = {
