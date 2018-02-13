@@ -12,10 +12,6 @@ Flask-Script = "*"
 Flask-WTF = "*"
 requests = "*"
 gunicorn = "*"
-
-
-[dev-packages]
-
 Flask-DebugToolbar = "*"
 
 
