@@ -1,8 +1,41 @@
 {% extends "base.html" %}
 
+{% block head %}
+{{ super() }}
+<style type="text/css">
+ body > .grid {
+   height: 100%;
+ }
+ .column {
+   background-color: white;
+   margin: 0 2rem;
+ }
+ .button {
+   margin-top: 2rem !important;
+ }
+</style>
+{% endblock %}
+
 {% block title %}VC Connect{% endblock %}
 
 {% block page_content %}
-<h1>Home Page</h1>
-<h2>TODO</h2>
+
+<div class="ui middle aligned center aligned four column stackable grid">
+  <div class="column">
+    <div class="content">
+      <img src="{{ url_for('static', filename='organisations.svg') }}" height="260px">
+      <a href="{{ url_for('.orgs') }}" class="ui fluid large primary submit button">Organisations Search</a>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <img src="{{ url_for('static', filename='venues.svg') }}" height="260px">
+      <a href="{{ url_for('.orgs') }}" class="ui fluid large primary submit button">Venues Search</a>
+    </div>
+  </div>
+
+</div>
+
+
+
 {% endblock %}
