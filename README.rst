@@ -1,8 +1,18 @@
 VCConnect-Flask
 ===============
 
-A simple Flask_ app that allows `VC Connect`_ users such as a
-volunteer centre to provide a web based community directory.
+A simple Flask_ app that allows `VC Connect`_ users such as a volunteer
+centre to provide a web based community directory.
+
+This was originally developed for `Northumberland CVA`_ but with some
+small modifications to the logo etc. it should be useable for other
+organisations.
+
+Preview
+-------
+
+To get an idea of what a live community directory using this project
+looks like visit: https://directory.northumberlandcva.org.uk
 
 Configuration
 -------------
@@ -42,3 +52,5 @@ VCConnect-Flask is released under the `Apache License 2.0`_.
 .. _Flask: http://flask.pocoo.org
 .. _VC Connect: http://www.vcconnect.org.uk
 .. _Apache License 2.0: https://opensource.org/licenses/Apache-2.0
+
+.. _Northumberland CVA: http://northumberlandcva.org.uk
